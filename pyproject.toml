@@ -1,0 +1,55 @@
+[build-system]
+requires = [
+  "scikit-build-core>=0.10.0",
+  "pybind11>=2.11",
+]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "rts_smoother"
+version = "0.1.0"
+description = "High-performance RTS Kalman smoother for column-wise financial matrices (local level model)"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Oleg Mitsik", email = "chazer@yandex.com" }]
+license = { file = "LICENSE" }
+dependencies = ["numpy>=1.23", "pandas>=1.5"]
+keywords = ["kalman", "filter", "rts", "smoother", "finance", "time-series", "pybind11"]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: C++",
+  "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://github.com/OlegMitsik/rts_smoother"
+Issues = "https://github.com/OlegMitsik/rts_smoother/issues"
+
+[tool.scikit-build]
+cmake.version = ">=3.18"
+cmake.build-type = "Release"
+wheel.packages = ["python/rts_smoother"]
+wheel.expand-macos-universal-tags = true
+
+sdist.include = [
+  "src/**",
+  "CMakeLists.txt",
+  "python/**",
+  "README.md",
+  "LICENSE",
+  "examples/**",
+]
+
+sdist.exclude = [
+  "**/__pycache__/**",
+  "**/*.pyc",
+  ".git/**",
+]
