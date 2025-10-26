@@ -26,21 +26,25 @@ jobs:
         shell: bash            
         run: |
           python -m pip install -U pip
-          python -m pip install -U build cmake ninja "pybind11>=2.11" "scikit-build-core>=0.10"
+          python -m pip install -U build cmake ninja "pybind11>=2.11" "scikit-build-core>=0.10" "cibuildwheel>=2.21.3"
       
       # Build and install
       - name: Install wheel
         shell: bash
+        env:
+          CIBW_SKIP: "pp* *-musllinux_*"
+          CIBW_OUTPUT_DIR: dist        
         run: |
-          python -m build --sdist --wheel
+          cibuildwheel
+          python -m build --sdist
           python -m pip install dist/*.whl
 
       # Upload
-      - name: Upload to PyPI
+      - name: Upload to PyPI 
         shell: bash            
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          python -m pip install -U twine          
+          python -m pip install -U twine
           twine upload --skip-existing dist/*
