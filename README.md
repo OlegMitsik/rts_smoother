@@ -1,4 +1,4 @@
-# RTS Kalman Smoother (C++ × Python)
+# RTS Kalman Smoother
 
 The package provides a high-performance **Rauch–Tung–Striebel** Kalman smoother for the **local level** model.
 This model is a canonical choice for asset prices and similar data (random walk latent state).  
